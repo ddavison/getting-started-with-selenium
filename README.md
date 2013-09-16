@@ -19,7 +19,6 @@ The primary goals of this project are to...
 - Take advantage of method chaining, to create a fluent interface.
 - Abstract the programmer from bloated scripts resulting from using too many css selectors.
 - Provide a quick and easy framework in Selenium 2 using Java, to get started writing scripts.
-- 
 
 # In-line validations
 This is one of the most important features that I want to _*accentuate*_.
