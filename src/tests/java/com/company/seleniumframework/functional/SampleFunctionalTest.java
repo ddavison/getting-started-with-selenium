@@ -25,9 +25,8 @@ public class SampleFunctionalTest extends AutomationTest {
      */
     @Test
     public void test() {
-        
-        
-        // click / validateAttribute
+
+    	// click / validateAttribute
         click(props.get("click"))
         .validateAttribute(props.get("click"), "class", "success") // validate that the class indeed added.
         

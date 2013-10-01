@@ -241,8 +241,8 @@ public class AutomationTest {
                 m = p.matcher(driver.getCurrentUrl());
 
                 if (m.find()) {
-                    attempts = 0;
-                    return switchToWindow(regex);
+                	attempts = 0;
+                	return switchToWindow(regex);
                 }
                 else {
                     // try for title
@@ -251,17 +251,6 @@ public class AutomationTest {
                     if (m.find()) {
                         attempts = 0;
                         return switchToWindow(regex);
-                    }
-                    else {
-                        if (attempts <= MAX_ATTEMPTS) {
-                            attempts++;
-                            
-                            try {Thread.sleep(1000);}catch(Exception x) { x.printStackTrace(); }
-
-                            return waitForWindow(regex);
-                        } else {
-                            fail("Window with url|title: " + regex + " did not appear after " + MAX_ATTEMPTS + " tries. Exiting.");
-                        }
                     }
                 }
             } catch(NoSuchWindowException e) {
@@ -308,12 +297,11 @@ public class AutomationTest {
             if (m.find()) return this;
             else {
                 m = p.matcher(driver.getCurrentUrl());
-                
                 if (m.find()) return this;
-                else fail("Couldn't switch to window with title / url : " + regex);
             }
         }
         
+        fail("Could not switch to window with title / url: " + regex);
         return this;
     }
     
@@ -327,6 +315,15 @@ public class AutomationTest {
      * @return
      */
     public AutomationTest closeWindow(String regex) {
+    	if (regex == null) {
+    		driver.close();
+    		
+    		if (driver.getWindowHandles().size() == 1)
+    			driver.switchTo().window(driver.getWindowHandles().iterator().next());
+    		
+    		return this;
+    	}
+    	
         Set<String> windows = driver.getWindowHandles();
         
         for (String window : windows) {
