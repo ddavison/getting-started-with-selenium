@@ -6,5 +6,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Config {
     public String url();
-    public Browser browser() default Browser.CHROME;
+    public Browser browser() default Browser.FIREFOX;
 }
