@@ -60,7 +60,10 @@ public class AutomationTest {
         case FIREFOX: driver = new FirefoxDriver(); break;
         case INTERNET_EXPLORER: driver = new InternetExplorerDriver(); break;
         case SAFARI: driver = new SafariDriver(); break;
-        case HTMLUNIT: driver = new HtmlUnitDriver(); break;
+        case HTMLUNIT: // If you are designing a regression system, HtmlUnit is NOT recommended.  
+            driver = new HtmlUnitDriver(); 
+            ((HtmlUnitDriver)driver).setJavascriptEnabled(true);
+        break;
         }
         
         // load the properties.
@@ -73,7 +76,8 @@ public class AutomationTest {
                 props.put(key, By.cssSelector(properties.getProperty(key)));
         } 
         catch (Exception x) {
-            x.printStackTrace();
+//            x.printStackTrace();
+            System.err.println("WARN: No css properties file for this test was found.  You can create one under /src/tests/resources/<package(s)>/" + getClass().getSimpleName().concat(".properties"));
         }
         
         driver.navigate().to(baseUrl);
