@@ -9,7 +9,8 @@ public enum Browser {
     CHROME("chrome"),
     FIREFOX("firefox"),
     INTERNET_EXPLORER("ie"),
-    SAFARI("safari");
+    SAFARI("safari"), 
+    HTMLUNIT("htmlunit");
     
     String moniker;
     

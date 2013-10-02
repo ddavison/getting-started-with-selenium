@@ -19,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -59,6 +60,7 @@ public class AutomationTest {
         case FIREFOX: driver = new FirefoxDriver(); break;
         case INTERNET_EXPLORER: driver = new InternetExplorerDriver(); break;
         case SAFARI: driver = new SafariDriver(); break;
+        case HTMLUNIT: driver = new HtmlUnitDriver(); break;
         }
         
         // load the properties.
