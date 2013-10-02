@@ -15,7 +15,7 @@ import com.company.seleniumframework.Config;
  *
  */
 
-@Config(url = "http://sircapsalot.no-ip.biz:4444/tests/getting-started-with-selenium.htm", browser = Browser.FIREFOX) // You are able to specify a "base url" for your test, from which you will test. You may leave `browser` blank.
+@Config(url = "http://ddavison.github.io/tests/getting-started-with-selenium.htm", browser = Browser.FIREFOX) // You are able to specify a "base url" for your test, from which you will test. You may leave `browser` blank.
 public class SampleFunctionalTest extends AutomationTest {
     
     /**
