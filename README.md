@@ -1,5 +1,5 @@
 # Getting Started
-To get right up and started,  you need to checkout the project from github, if you don't know how, [this should help](http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository).
+To get right up and started,  you can [download the project (zip)](https://github.com/ddavison/getting-started-with-selenium/archive/master.zip) or you can checkout the project from github. If you don't know how, [this should help](http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository).
 
 **Prerequisites**
 - Maven (if using eclipse, install Maven Integration for Eclipse)
