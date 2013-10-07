@@ -40,7 +40,8 @@ Another nice feature that is offered, is the simplicity of window switching in S
 
 - ```switchToWindow(regex)```
 - ```waitForWindow(regex)```
+
 Both of these functions take a regular expression argument, and match either the url or title of the window that you want to switch to.
 
 # Implicit Waiting
-In addition to the Selenium 2 implicit waiting, the ```AutomationTest``` class extends on this concept by implenting a sort of ```waitFor``` functionality.
+In addition to the Selenium 2 implicit waiting, the ```AutomationTest``` class extends on this concept by implenting a sort of ```waitFor``` functionality which ensures that an object appears before interacting with it.  This rids of most ```ElementNotFound``` exceptions that Selenium will cough up.
