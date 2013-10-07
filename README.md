@@ -45,3 +45,7 @@ Both of these functions take a regular expression argument, and match either the
 
 # Implicit Waiting
 In addition to the Selenium 2 implicit waiting, the ```AutomationTest``` class extends on this concept by implenting a sort of ```waitFor``` functionality which ensures that an object appears before interacting with it.  This rids of most ```ElementNotFound``` exceptions that Selenium will cough up.
+
+
+[See a working example](https://github.com/ddavison/getting-started-with-selenium/blob/master/src/tests/java/com/company/seleniumframework/functional/SampleFunctionalTest.java) of what a test script written using this framework might look like.
+
