@@ -480,6 +480,19 @@ public class AutomationTest {
         return this;
     }
     
+    /**
+     * Validate the Url
+     * @param regex Regular expression to match
+     * @return
+     */
+    public AutomationTest validateUrl(String regex) {
+        p = Pattern.compile(regex);
+        m = p.matcher(driver.getCurrentUrl());
+        
+        assertTrue("Url does not match regex [" + regex + "] (actual is: \""+driver.getCurrentUrl()+"\")", m.find());
+        return this;
+    }
+    
     /* ================================ */
     
     /**
@@ -492,4 +505,22 @@ public class AutomationTest {
         return this;
     }
     
+    /**
+     * Navigates to an absolute or relative Url.
+     * @param url Use cases are:<br>
+     * <blockquote>
+     * <code>navigateTo("/login") // navigate to a relative url. slash meaning start fresh from the base url.</code><br><br>
+     * <code>navigateTo("path") // navigate to a relative url. will simply append "path" to the current url.</code><br><br>
+     * <code>navigateTo("http://google.com") // navigates to an absolute url.</code>
+     * </blockquote>
+     * @return
+     */
+    public AutomationTest navigateTo(String url) {
+        // absolute url
+        if (url.contains("://"))      driver.navigate().to(url);
+        else if (url.startsWith("/")) driver.navigate().to(baseUrl.concat(url));
+        else                          driver.navigate().to(driver.getCurrentUrl().concat(url));
+        
+        return this;
+    }
 }
