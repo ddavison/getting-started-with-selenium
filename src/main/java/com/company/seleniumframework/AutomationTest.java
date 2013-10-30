@@ -109,7 +109,7 @@ public class AutomationTest {
             }
         }
         
-        if (size > 0) System.err.println("WARN: There are more than 1 " + by.toString() + " 's!");
+        if (size > 1) System.err.println("WARN: There are more than 1 " + by.toString() + " 's!");
         
         return driver.findElement(by);
     }
