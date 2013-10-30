@@ -21,6 +21,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -38,6 +39,8 @@ public class AutomationTest {
     private final int MAX_ATTEMPTS = 5;
     
     private int attempts = 0;
+    
+    public Actions actions;
     
     public Map<String, By> props = new HashMap<String, By>();
     
@@ -80,6 +83,7 @@ public class AutomationTest {
             System.err.println("WARN: No css properties file for this test was found.  You can create one under /src/tests/resources/<package(s)>/" + getClass().getSimpleName().concat(".properties"));
         }
         
+        actions = new Actions(driver);
         driver.navigate().to(baseUrl);
     }
     
@@ -135,6 +139,16 @@ public class AutomationTest {
         WebElement element = waitForElement(by);
         element.clear();
         element.sendKeys(text);
+        return this;
+    }
+    
+    /**
+     * Hover over an element.
+     * @param by The element to hover over.
+     * @return
+     */
+    public AutomationTest hoverOver(By by) {
+        actions.moveToElement(driver.findElement(by)).perform();
         return this;
     }
     
