@@ -49,3 +49,5 @@ In addition to the Selenium 2 implicit waiting, the ```AutomationTest``` class e
 
 [See a working example](https://github.com/ddavison/getting-started-with-selenium/blob/master/src/tests/java/com/company/seleniumframework/functional/SampleFunctionalTest.java) of what a test script written using this framework might look like.
 
+# Pull requests
+If you have an idea for the framework, fork it, and put in a PR. I'll look it over and see if it should be in the framework!
