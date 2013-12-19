@@ -7,7 +7,7 @@
   <description>A quick and easy start-up browser automation framework</description>
   
   <properties>
-    <selenium_version>2.35.0</selenium_version>
+    <selenium_version>2.38.0</selenium_version>
   </properties>
   
   <build>

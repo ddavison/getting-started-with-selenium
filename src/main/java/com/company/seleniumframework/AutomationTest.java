@@ -57,6 +57,8 @@ public class AutomationTest {
         configuration = getClass().getAnnotation(Config.class);
         
         baseUrl = configuration.url();
+
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         
         switch (configuration.browser()) {
         case CHROME: driver = new ChromeDriver(); break;
@@ -434,6 +436,19 @@ public class AutomationTest {
         String actual = getText(by);
         
         assertTrue(String.format("Text does not match! [expected: %s] [actual: %s]", text, actual), text.equals(actual));
+        return this;
+    }
+
+    /**
+     * Validate that the text of an element is not matching text.
+     * @param by The element to validate the text of.
+     * @param text The text to validate.
+     * @return
+     */
+    public AutomationTest validateTextNot(By by, String text) {
+        String actual = getText(by);
+
+        assertFalse(String.format("Text matches! [expected: %s] [actual: %s]", text, actual), text.equals(actual));
         return this;
     }
     
