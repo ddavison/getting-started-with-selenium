@@ -26,6 +26,7 @@ The primary goals of this project are to...
 # In-line validations
 This is one of the most important features that I want to _*accentuate*_.
 - ```validateText```
+- ```validateTextNot```
 - ```validateChecked```
 - ```validateUnchecked```
 - ```validatePresent```
