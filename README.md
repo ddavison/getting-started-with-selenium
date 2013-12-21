@@ -9,7 +9,7 @@ To get right up and started,  you can [download the project (zip)](https://githu
 
 ### Drivers
 Currently, not all drivers are not packaged with this project, but they may be in the future!
-- [Chromedriver](https://code.google.com/p/chromedriver/downloads/list)
+- [Chromedriver](https://code.google.com/p/chromedriver/downloads/list) (now is packaged with the project)
 - Firefox driver IS actually packaged with the Selenium jar.
 - [IEDriver](https://code.google.com/p/selenium/downloads/list)
 
@@ -26,6 +26,7 @@ The primary goals of this project are to...
 # In-line validations
 This is one of the most important features that I want to _*accentuate*_.
 - ```validateText```
+- ```validateTextNot```
 - ```validateChecked```
 - ```validateUnchecked```
 - ```validatePresent```
