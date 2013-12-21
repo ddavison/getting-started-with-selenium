@@ -399,6 +399,15 @@ public class AutomationTest {
         }
         return this;
     }
+
+    /**
+     * Switch back to the default content (the first window / frame that you were on before switching)
+     * @return
+     */
+    public AutomationTest switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+        return this;
+    }
     
     /* ************************ */
     
