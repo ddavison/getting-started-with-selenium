@@ -7,4 +7,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Config {
     public String url();
     public Browser browser() default Browser.FIREFOX;
+    public String hub() default "";
 }

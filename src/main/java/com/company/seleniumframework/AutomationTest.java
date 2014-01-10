@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -13,15 +14,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.After;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchWindowException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -55,22 +55,50 @@ public class AutomationTest {
     
     public AutomationTest() {
         configuration = getClass().getAnnotation(Config.class);
+
+        Capabilities capabilities = null;
         
         baseUrl = configuration.url();
 
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        
+
+        boolean isLocal = configuration.hub().equals("") ? true : false;
+
         switch (configuration.browser()) {
-        case CHROME: driver = new ChromeDriver(); break;
-        case FIREFOX: driver = new FirefoxDriver(); break;
-        case INTERNET_EXPLORER: driver = new InternetExplorerDriver(); break;
-        case SAFARI: driver = new SafariDriver(); break;
-        case HTMLUNIT: // If you are designing a regression system, HtmlUnit is NOT recommended.  
-            driver = new HtmlUnitDriver(); 
-            ((HtmlUnitDriver)driver).setJavascriptEnabled(true);
-        break;
+            case CHROME:
+                capabilities = DesiredCapabilities.chrome();
+                if (isLocal) driver = new ChromeDriver(capabilities);
+                break;
+            case FIREFOX:
+                capabilities = DesiredCapabilities.firefox();
+                if (isLocal) driver = new FirefoxDriver(capabilities);
+                break;
+            case INTERNET_EXPLORER:
+                capabilities = DesiredCapabilities.internetExplorer();
+                if (isLocal) driver = new InternetExplorerDriver(capabilities);
+                break;
+            case SAFARI:
+                capabilities = DesiredCapabilities.safari();
+                if (isLocal) driver = new SafariDriver(capabilities);
+                break;
+            case HTMLUNIT: // If you are designing a regression system, HtmlUnit is NOT recommended.
+                capabilities = DesiredCapabilities.htmlUnitWithJs();
+                if (isLocal) driver = new HtmlUnitDriver(capabilities);
+                break;
+            default:
+                System.err.println("Unknown browser: " + configuration.browser());
+                return;
         }
-        
+
+        if (!isLocal)
+            // they are using a hub.
+            try {
+                driver = new RemoteWebDriver(new URL(configuration.hub()), capabilities); // just override the driver.
+            } catch (Exception x) {
+                System.err.println("Couldn't connect to hub: " + configuration.hub());
+                return;
+            }
+
         // load the properties.
         Properties properties = new Properties();
         try {
