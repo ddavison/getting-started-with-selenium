@@ -561,4 +561,14 @@ public class AutomationTest {
         
         return this;
     }
+
+    /**
+     * Log something to 'out'
+     * @param object What to log.
+     * @return
+     */
+    public AutomationTest log(Object object) {
+        System.out.println(object);
+        return this;
+    }
 }
