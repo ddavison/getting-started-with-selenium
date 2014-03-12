@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -70,7 +71,7 @@ public class AutomationTest {
         
         baseUrl = configuration.url();
 
-        boolean isLocal = configuration.hub().equals("") ? true : false;
+        boolean isLocal = StringUtils.isEmpty(configuration.hub()) ? true : false;
 
         switch (configuration.browser()) {
             case CHROME:
@@ -195,7 +196,6 @@ public class AutomationTest {
      * @return
      */
     public AutomationTest setText(By by, String text) {
-        System.out.println(by.toString());
         WebElement element = waitForElement(by);
         element.clear();
         element.sendKeys(text);
@@ -337,7 +337,7 @@ public class AutomationTest {
                 if (attempts <= MAX_ATTEMPTS) {
                     attempts++;
                     
-                    try {Thread.sleep(1);}catch(Exception x) { x.printStackTrace(); }
+                    try {Thread.sleep(1000);}catch(Exception x) { x.printStackTrace(); }
 
                     return waitForWindow(regex);
                 } else {
@@ -353,6 +353,7 @@ public class AutomationTest {
         } else {
             System.out.println("#waitForWindow() : Window doesn't exist yet. [" + regex + "] Trying again. " + attempts + "/" + MAX_ATTEMPTS);
             attempts++;
+            try {Thread.sleep(1000);}catch(Exception x) { x.printStackTrace(); }
             return waitForWindow(regex);
         }
     }
@@ -516,6 +517,26 @@ public class AutomationTest {
         String actual = getText(by);
 
         assertFalse(String.format("Text matches! [expected: %s] [actual: %s]", text, actual), text.equals(actual));
+        return this;
+    }
+
+    /**
+     * Validate that text is present somewhere on the page.
+     * @param text The text to ensure is on the page.
+     * @return
+     */
+    public AutomationTest validateTextPresent(String text) {
+        assertTrue(driver.getPageSource().contains(text));
+        return this;
+    }
+
+    /**
+     * Validate that some text is nowhere on the page.
+     * @param text The text to ensure is not on the page.
+     * @return
+     */
+    public AutomationTest validateTextNotPresent(String text) {
+        assertFalse(driver.getPageSource().contains(text));
         return this;
     }
 
