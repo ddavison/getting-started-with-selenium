@@ -13,6 +13,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,8 +70,6 @@ public class AutomationTest {
         
         baseUrl = configuration.url();
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-
         boolean isLocal = configuration.hub().equals("") ? true : false;
 
         switch (configuration.browser()) {
@@ -124,6 +123,28 @@ public class AutomationTest {
         
         actions = new Actions(driver);
         driver.navigate().to(baseUrl);
+    }
+
+    static {
+        // Set the webdriver env vars.
+        if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+            System.setProperty("webdriver.chrome.driver", findFile("chromedriver"));
+            // System.setProperty("webdriver.ie.driver", null); // mac doesn't have ie
+            // System.setProperty("webdriver.firefox.driver", ""); // if using firefox, uncomment this, and replace "" with findFile("firefoxDriver")
+        } else {
+            System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
+            // System.setProperty("webdriver.ie.driver", findFile("iedriver.exe")); // if using IE, uncomment this.
+            // System.setProperty("webdriver.firefox.driver", ""); // if using firefox, uncomment this, and replace "" with findFile("firefoxDriver.exe")
+        }
+    }
+
+    static public String findFile(String filename) {
+        String paths[] = {"", "bin/", "target/classes"}; // if you have chromedriver somewhere else on the path, then put it here.
+        for(int x = 0; x < paths.length; x++) {
+            if (new File(paths[x] + filename).exists())
+                return paths[x] + filename;
+        }
+        return null;
     }
     
     @After
@@ -497,7 +518,7 @@ public class AutomationTest {
         assertFalse(String.format("Text matches! [expected: %s] [actual: %s]", text, actual), text.equals(actual));
         return this;
     }
-    
+
     /**
      * Validate that a checkbox or a radio button is checked.
      * @param by
