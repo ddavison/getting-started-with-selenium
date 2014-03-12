@@ -250,6 +250,16 @@ public class AutomationTest {
         
         return text;
     }
+
+    /**
+     * Get an attribute of an element
+     * @param by The element to get from.
+     * @param attribute The attribute to get.
+     * @return
+     */
+    public String getAttribute(By by, String attribute) {
+        return waitForElement(by).getAttribute(attribute);
+    }
     
     /**
      * Check a checkbox, or radio button.
