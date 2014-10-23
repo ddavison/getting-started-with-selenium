@@ -1,0 +1,10 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+target/*
+.idea/workspace.xml
+.idea/tasks.xml
