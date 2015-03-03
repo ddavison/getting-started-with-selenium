@@ -24,7 +24,7 @@
   <dependencies>
     <dependency>
       <groupId>io.ddavison</groupId>
-      <artifactId>getting-started-with-selenium-framework</artifactId>
+      <artifactId>conductor</artifactId>
       <version>[1,)</version>
     </dependency>
 
