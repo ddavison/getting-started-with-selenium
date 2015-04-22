@@ -1,8 +1,8 @@
 package com.company.seleniumframework.functional_area;
 
-import io.ddavison.selenium.AutomationTest;
-import io.ddavison.selenium.Browser;
-import io.ddavison.selenium.Config;
+import io.ddavison.conductor.Locomotive;
+import io.ddavison.conductor.Browser;
+import io.ddavison.conductor.Config;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -20,7 +20,7 @@ import org.openqa.selenium.By;
     hub = "" // you can specify a hub hostname / ip here.
 )
 // RIGHT CLICK SampleFunctionTest and run the test suite, or run each method individually.
-public class SampleFunctionalTest extends AutomationTest {
+public class SampleFunctionalTest extends Locomotive {
 
     @Test
     public void yourFirstTest() {
